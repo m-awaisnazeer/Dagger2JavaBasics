@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.dagger2java.Basics.MainViewModel;
 import com.example.dagger2java.Network.NetworkClient;
 import com.example.dagger2java.Network.NetworkConnection;
+import com.example.dagger2java.di.DaggerMainViewModelComponent;
 
 import static com.example.dagger2java.Basics.Constants.MY_TAG;
 
@@ -25,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
         TextView textView=findViewById(R.id.textView);
         Button button=findViewById(R.id.connect);
 
-        NetworkConnection connection = new NetworkConnection();
-        NetworkClient client = new NetworkClient(connection);
 
-        mMainViewModel = new MainViewModel(client);
+
+        mMainViewModel = DaggerMainViewModelComponent.create().getMainViewModel();
 
         button.setOnClickListener(view -> {
             Log.d(MY_TAG, "onCreate: Data fetched");
